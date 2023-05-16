@@ -2,6 +2,7 @@ import styled from "styled-components";
 import MemberForm from "./member";
 import NonMemberForm from "./non-member";
 import { useState } from "react";
+
 const LoginPage = () => {
   const [isMember, setIsMember] = useState(true);
 

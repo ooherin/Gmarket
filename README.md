@@ -16,3 +16,9 @@
 => 상품평 적고 저장하면 해당 완료/미완료 여부가 토스트 메세지로 저장됨.
 
 => 좋아요를 누른 목록이 찜한 목록에 저장되는 기능 만들기.
+
+사용 라이브러리
+
+- styled-components
+- react-hook-form
+- react-router-dom

@@ -1,15 +1,32 @@
 import styled from "styled-components";
 import * as S from "./style";
 import { useForm } from "react-hook-form";
+import idPassword from "./data/credentials";
+import { useNavigate } from "react-router-dom";
+
+//data폴더에 credentials.js에 아이디,비밀번호 정보가 있음
 const MemberForm = () => {
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
+  const onSubmit = (data) => {
+    const targetItem = idPassword.filter((item) => item.id === data.id);
+    console.log(targetItem);
+    if (targetItem.length === 0) return alert("로그인 실패하였습니다.");
+    if (targetItem[0].password === data.password) {
+      alert("로그인에 성공하였습니다");
+      navigate("/");
+    } else {
+      alert("로그인 실패하였습니다.");
+    }
+  };
+
   return (
-    <S.Form onSubmit={handleSubmit((data) => console.log(data))}>
+    <S.Form onSubmit={handleSubmit(onSubmit)}>
       <S.InputContainer>
         <S.LabelIcon src="./images/mypage.png" />
         <S.Input
