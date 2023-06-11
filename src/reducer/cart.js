@@ -69,10 +69,43 @@ export const cartSlice = createSlice({
       localStorage.setItem("cart", JSON.stringify(deleteState));
       return deleteState;
     },
+    UnSelectItem(state, action) {
+      const { id, selected } = action.payload;
+      const unSelectState = state.map((item) => {
+        if (item.id === id) {
+          return { ...item, selected: !selected };
+        }
+        return item;
+      });
+      localStorage.setItem("cart", JSON.stringify(unSelectState));
+      return unSelectState;
+    },
+    //처음 장바구니에 들어갈때 이거 자동 실행
+    SelectAllItem(state) {
+      const selectAllState = state.map((item) => {
+        return item.selected === true;
+      });
+      localStorage.setItem("cart", JSON.stringify(selectAllState));
+      return selectAllState;
+    },
+    UnSelectAllItem(state) {
+      const unSelectAllState = state.map((item) => {
+        return item.selected === false;
+      });
+      localStorage.setItem("cart", JSON.stringify(unSelectAllState));
+      return unSelectAllState;
+    },
   },
 });
 
 //rtk는 action 자동 생성
 //이렇게 바로 slice.actions에서 함수를 꺼내면 바로 import 해서 쓸 수 있다.
-export const { AddItem, IncreaseItem, DecreaseItem, DeleteItem } =
-  cartSlice.actions;
+export const {
+  AddItem,
+  IncreaseItem,
+  DecreaseItem,
+  DeleteItem,
+  UnSelectItem,
+  SelectAllItem,
+  UnSelectAllItem,
+} = cartSlice.actions;

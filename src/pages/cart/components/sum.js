@@ -10,8 +10,9 @@ const SumPrice = () => {
   //return 안에 return 문
   //최종적으로 반환하는것은 reduce
   const PriceSum = () => {
-    return cart.reduce((acc, cur) => {
-      console.log(cur.price);
+    const selected = cart.filter((item) => item.selected === true);
+    console.log("selected", selected);
+    return selected.reduce((acc, cur) => {
       return acc + cur.price * cur.count;
     }, 0); // 초기값 0으로 설정
   };

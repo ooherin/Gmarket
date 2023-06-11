@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Count = ({ targetItem }) => {
   //0을 적어줘야 함?
-  const { id, name, price, image, company } = targetItem[0];
+  const { id, name, price, image, company, selected } = targetItem[0];
   console.log("targetItem", targetItem[0]);
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
@@ -27,7 +27,7 @@ const Count = ({ targetItem }) => {
   const onSubmitCart = (e) => {
     e.preventDefault();
     console.log(id, name, price, image, count);
-    dispatch(AddItem({ id, name, price, image, count, company }));
+    dispatch(AddItem({ id, name, price, image, count, company, selected }));
     if (
       window.confirm(
         "장바구니에 해당 상품이 담겼습니다. 장바구니로 이동하시겠습니까?"

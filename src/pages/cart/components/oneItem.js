@@ -1,11 +1,16 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { DecreaseItem, IncreaseItem, DeleteItem } from "reducer/cart";
+import {
+  DecreaseItem,
+  IncreaseItem,
+  DeleteItem,
+  UnSelectItem,
+} from "reducer/cart";
 import { BiCheckCircle } from "react-icons/bi";
 
 const OneItem = ({ item }) => {
-  const { id, count, image, name, price, company } = item;
+  const { id, count, image, name, price, company, selected } = item;
   const [isCheck, setIsCheck] = useState(true);
 
   const dispatch = useDispatch();
@@ -19,7 +24,6 @@ const OneItem = ({ item }) => {
   };
 
   //장바구니에 들어갔음.
-  const onClickDelete = () => {};
 
   const increaseItemCount = () => {
     dispatch(IncreaseItem({ id, count }));
@@ -35,6 +39,7 @@ const OneItem = ({ item }) => {
 
   const onClickCheck = () => {
     setIsCheck((prev) => !prev);
+    dispatch(UnSelectItem({ id, selected }));
   };
 
   return (
