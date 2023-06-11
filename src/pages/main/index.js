@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import products from "./components/data";
+// import ItemList from "./components/ItemList";
 import ItemList from "./components/ItemList";
 const MainPage = (products) => {
   return (
@@ -16,16 +16,15 @@ const MainPage = (products) => {
 export default MainPage;
 
 const GmarketTitle = styled.div`
-  width: 400px;
   height: 70px;
-  font-size: 45px;
+  font-size: 35px;
   display: inline;
 `;
 
 const BestTitle = styled.div`
   width: 400px;
   height: 70px;
-  font-size: 45px;
+  font-size: 35px;
   font-weight: 700;
   color: blue;
   display: inline;
@@ -33,7 +32,9 @@ const BestTitle = styled.div`
 
 const TitleContainer = styled.div`
   margin-top: 30px;
-  margin-left: 120px;
+  display: flex;
+  width: 500px;
+  padding-left: 200px;
 `;
 
 const Wrapper = styled.div``;

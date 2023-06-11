@@ -14,7 +14,7 @@ const MemberForm = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    const targetItem = idPassword.filter((item) => item.id === data.id);
+    const targetItem = idPassword.filter((value) => value.id === data.id);
     console.log(targetItem);
     if (targetItem.length === 0) return alert("로그인 실패하였습니다.");
     if (targetItem[0].password === data.password) {

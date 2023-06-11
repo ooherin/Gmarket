@@ -25,28 +25,28 @@ const OneItem = ({ product, index }) => {
 };
 
 const ItemContainer = styled.div`
-  width: 300px;
-  height: 500px;
+  width: 230px;
+  height: 370px;
 `;
 
 const ImgContainer = styled.div`
   position: relative;
 `;
 const ProductImg = styled.img`
-  width: 300px;
-  height: 300px;
+  width: 210px;
+  height: 210px;
 `;
 
 const BigSmileLogo = styled.img`
-  height: 80px;
+  height: 50px;
   z-index: 10;
   position: absolute;
   top: 0;
   left: 0;
 `;
 const Number = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   border-bottom: 5px solid #06d47e;
   font-size: 30px;
   text-align: center;
@@ -54,19 +54,20 @@ const Number = styled.div`
 `;
 
 const ProductName = styled.div`
-  width: 300px;
-  height: 30px;
+  width: 210px;
+  height: 20px;
+  font-size: 13px;
 `;
 const ProductPrice = styled.div`
-  width: 300px;
+  width: 210px;
   height: 30px;
   font-size: 20px;
   font-weight: 700;
   margin-top: 20px;
 `;
 const ShippingContainer = styled.div`
-  width: 300px;
-  height: 50px;
+  width: 210px;
+  height: 30px;
 `;
 
 export default OneItem;

@@ -1,14 +1,17 @@
 import { useParams } from "react-router-dom";
-import products from "../main/components/data";
+// import products from "../main/components/data";
+import products from "data/data";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Count from "./components/count";
+
 const DetailPage = () => {
   const [data, setData] = useState();
   let params = useParams();
   //params의 형태는 string임
   const targetItem = products.filter((product) => product.id === params.id / 1);
-  console.log(targetItem);
+  console.log("targetItem", targetItem[0]);
+  // const { id, name, price, image } = targetItem;
   useEffect(() => {
     setData(targetItem[0]);
   }, [params]);
@@ -25,11 +28,7 @@ const DetailPage = () => {
               .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
           </Price>
         )}
-        {data && <Count price={data.price} />}
-        <ButtonContainer>
-          <CartButton>장바구니</CartButton>
-          <BuyButton>구매하기</BuyButton>
-        </ButtonContainer>
+        {data && <Count targetItem={targetItem} />}
       </TextContainer>
     </Wrapper>
   );
@@ -41,22 +40,22 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1250px;
+  width: 900px;
   margin: 0 auto;
 `;
 
 const ImgContainer = styled.img`
-  height: 600px;
-  width: 600px;
+  height: 400px;
+  width: 400px;
   background-color: skyblue;
 `;
 const TextContainer = styled.div`
-  height: 600px;
-  width: 600px;
+  height: 400px;
+  width: 400px;
   margin-top: 70px;
 `;
 const Title = styled.div`
-  font-size: 33px;
+  font-size: 30px;
   font-weight: 600;
   display: block;
 `;

@@ -12,7 +12,7 @@ const NonMemberForm = () => {
       <S.InputContainer>
         <S.LabelIcon src="./images/mypage.png" />
         <S.Input
-          placeholder="주문자 이름"
+          placeholder="아이디"
           {...register("name", {
             required: "이름을 입력해주세요",
           })}
@@ -21,19 +21,19 @@ const NonMemberForm = () => {
       <S.InputContainer>
         <S.LabelIcon src="./images/mypage.png" />
         <S.Input
-          placeholder="휴대폰 번호"
+          placeholder="비밀번호"
           type="number"
           {...register("phoneNumber", {
-            required: "휴대폰 번호를 입력해주세요",
+            required: "비밀번호를 입력해주세요",
           })}
         />
       </S.InputContainer>
       <S.InputContainer>
         <S.LabelIcon src="./images/mypage.png" />
         <S.Input
-          placeholder="주문 비밀번호"
+          placeholder="비밀번호 확인"
           {...register("orderPassword", {
-            required: "주문 비밀번호를 입력해주세요",
+            required: "비밀번호 확인을 입력해주세요",
           })}
         />
       </S.InputContainer>
@@ -44,7 +44,7 @@ const NonMemberForm = () => {
       {errors.orderPassword && (
         <S.ErrorMsg>{errors.orderPassword.message}</S.ErrorMsg>
       )}
-      <S.Button>주문내역 조회</S.Button>
+      <S.Button>회원가입</S.Button>
     </S.Form>
   );
 };
