@@ -11,13 +11,21 @@ const SumPrice = () => {
   //최종적으로 반환하는것은 reduce
   const PriceSum = () => {
     const selected = cart.filter((item) => item.selected === true);
-    console.log("selected", selected);
     return selected.reduce((acc, cur) => {
       return acc + cur.price * cur.count;
     }, 0); // 초기값 0으로 설정
   };
+  const convertedPrice = (price) => {
+    return price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  };
 
-  console.log(PriceSum());
+  const shippingPrice = (item) => {
+    return item * 3000;
+  };
+
+  const TotalCovertedPrice = () => {
+    return convertedPrice(PriceSum() + shippingPrice(ItemCount));
+  };
 
   return (
     <Wrapper>
@@ -31,10 +39,10 @@ const SumPrice = () => {
           <div>상품금액</div>
           <div>{PriceSum()}원</div>{" "}
         </Item>
-        <Item>배송비 3000원</Item>
+        <Item>배송비 {3000 * ItemCount}원</Item>
         <Item>총 결제금액</Item>
         <TotalPrice>
-          <div>{PriceSum() + 3000}원</div>
+          <div>{TotalCovertedPrice()}원</div>
         </TotalPrice>
       </PriceContainer>
     </Wrapper>

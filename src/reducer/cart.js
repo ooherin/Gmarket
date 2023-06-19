@@ -69,7 +69,7 @@ export const cartSlice = createSlice({
       localStorage.setItem("cart", JSON.stringify(deleteState));
       return deleteState;
     },
-    UnSelectItem(state, action) {
+    ChangeSelectItem(state, action) {
       const { id, selected } = action.payload;
       const unSelectState = state.map((item) => {
         if (item.id === id) {
@@ -83,17 +83,25 @@ export const cartSlice = createSlice({
     //처음 장바구니에 들어갈때 이거 자동 실행
     SelectAllItem(state) {
       const selectAllState = state.map((item) => {
-        return item.selected === true;
+        return { ...item, selected: true };
       });
       localStorage.setItem("cart", JSON.stringify(selectAllState));
       return selectAllState;
     },
     UnSelectAllItem(state) {
       const unSelectAllState = state.map((item) => {
-        return item.selected === false;
+        return { ...item, selected: false };
       });
       localStorage.setItem("cart", JSON.stringify(unSelectAllState));
       return unSelectAllState;
+    },
+    removeAllItem(state) {
+      if (window.confirm("장바구니의 모든 상품을 삭제하시겠습니까?")) {
+        const removeState = [];
+        localStorage.removeItem("cart");
+        return removeState;
+      }
+      return state;
     },
   },
 });
@@ -105,7 +113,8 @@ export const {
   IncreaseItem,
   DecreaseItem,
   DeleteItem,
-  UnSelectItem,
+  ChangeSelectItem,
   SelectAllItem,
   UnSelectAllItem,
+  removeAllItem,
 } = cartSlice.actions;

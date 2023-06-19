@@ -1,22 +1,49 @@
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import OneItem from "./components/oneItem";
 import SumPrice from "./components/sum";
 import { BiCheckCircle } from "react-icons/bi";
+import { UnSelectAllItem, SelectAllItem, removeAllItem } from "reducer/cart";
+import { useState } from "react";
+import EmptyCart from "./components/empty";
 const CartPage = () => {
   const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const [isAllSelected, setIsAllSelected] = useState(true);
 
-  return (
+  const onRemoveAllItem = () => {
+    dispatch(removeAllItem());
+  };
+
+  const onAllSelectItem = () => {
+    dispatch(SelectAllItem());
+    setIsAllSelected(true);
+  };
+
+  const onAllUnSelectItem = () => {
+    dispatch(UnSelectAllItem());
+    setIsAllSelected(false);
+  };
+  console.log("isAllSelected", isAllSelected);
+
+  return cart.length > 0 ? (
     <Wrapper>
       <Header>
         <Title>장바구니</Title>
         <TotalCount>전체 {cart.length}</TotalCount>
         <NavBar>
-          <div>
-            <BiCheckCircle />
-            전체선택
-          </div>
-          <div>선택삭제</div>
+          {isAllSelected ? (
+            <AllButton onClick={onAllUnSelectItem}>
+              <BiCheckCircle style={{ color: "#999" }} />
+              전체해제
+            </AllButton>
+          ) : (
+            <AllButton onClick={onAllSelectItem} style={{ color: "blue" }}>
+              <BiCheckCircle style={{ color: "blue" }} />
+              전체선택
+            </AllButton>
+          )}
+          <AllButton onClick={onRemoveAllItem}>전체삭제</AllButton>
         </NavBar>
       </Header>
       <Flex>
@@ -28,6 +55,8 @@ const CartPage = () => {
         <SumPrice />
       </Flex>
     </Wrapper>
+  ) : (
+    <EmptyCart />
   );
 };
 export default CartPage;
@@ -57,7 +86,16 @@ const Header = styled.div`
 const Flex = styled.div`
   display: flex;
   background-color: #f3f3f3;
+  min-height: 500px;
   width: 100%;
+  padding-left: 100px;
+`;
+
+const AllButton = styled.div`
+  font-size: 17px;
+  div {
+    font-size: 17px;
+  }
 `;
 
 const Title = styled.div`

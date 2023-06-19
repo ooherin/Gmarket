@@ -5,14 +5,12 @@ import {
   DecreaseItem,
   IncreaseItem,
   DeleteItem,
-  UnSelectItem,
+  ChangeSelectItem,
 } from "reducer/cart";
 import { BiCheckCircle } from "react-icons/bi";
 
 const OneItem = ({ item }) => {
   const { id, count, image, name, price, company, selected } = item;
-  const [isCheck, setIsCheck] = useState(true);
-
   const dispatch = useDispatch();
 
   const countPrice = price * count;
@@ -34,19 +32,21 @@ const OneItem = ({ item }) => {
   };
 
   const deleteItem = () => {
-    dispatch(DeleteItem({ id }));
+    if (window.confirm("해당 상품을 삭제하시겠습니까?")) {
+      dispatch(DeleteItem({ id }));
+    }
   };
 
   const onClickCheck = () => {
-    setIsCheck((prev) => !prev);
-    dispatch(UnSelectItem({ id, selected }));
+    // setIsCheck((prev) => !prev);
+    dispatch(ChangeSelectItem({ id, selected }));
   };
 
   return (
     item && (
       <Wrapper>
         <CompanyContainer>
-          {isCheck ? (
+          {selected ? (
             <BiCheckCircle
               onClick={onClickCheck}
               size={24}
@@ -69,15 +69,19 @@ const OneItem = ({ item }) => {
             <CountNumber>{count}</CountNumber>
             <CountChangeButton onClick={increaseItemCount}>+</CountChangeButton>
           </CountChangeBox>
-          <Price>{convertedPrice(price)}</Price>
+          <Price>{convertedPrice(price)}원</Price>
           <Button onClick={deleteItem}>삭제</Button>
         </Flex>
+        <PriceContainer>
+          {selected ? (
+            <SelectItemPrice>{convertedPrice(price)}원</SelectItemPrice>
+          ) : null}
+        </PriceContainer>
       </Wrapper>
     )
   );
 };
 export default OneItem;
-
 const Wrapper = styled.div`
   width: 500px;
   height: 200px;
@@ -116,9 +120,22 @@ const Title = styled.div`
 `;
 
 const Price = styled.div`
-  font-size: 23px;
+  font-size: 20px;
+  font-weight: 800;
+  color: black;
+`;
+
+const PriceContainer = styled.div`
+  width: 100%;
+  background-color: skyblue;
+  position: relative;
+`;
+const SelectItemPrice = styled.div`
+  font-size: 27px;
   font-weight: 800;
   color: green;
+  position: absolute;
+  right: 0;
 `;
 
 const CountNumber = styled.div`
